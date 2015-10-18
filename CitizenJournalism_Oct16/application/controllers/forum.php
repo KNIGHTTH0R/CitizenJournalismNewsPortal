@@ -8,8 +8,19 @@ Class forum extends CI_Controller{
 		$this->load->library('session');
 		$this->load->helper('url');
 		$this->load->library('upload');
+		$this->load->library('unit_test');
 	}
 
+	public function test()
+	{
+
+		echo $this->unit->run($this->forum_model->get_forum(),'is_array', 'Get Forums');
+		echo $this->unit->run($this->forum_model->get_member_name(19),'is_array', 'Get member name');
+		echo $this->unit->run($this->forum_model->get_member_pic(21),'is_array', 'Get member picture');
+		echo $this->unit->run($this->forum_model->get_category_name(9),'is_string', 'Get category name');
+		echo $this->unit->run($this->forum_model->get_comment(),'is_array', 'Get comments');
+	}
+	
 	
 	public function index()
 	{

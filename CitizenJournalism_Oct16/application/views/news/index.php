@@ -153,7 +153,7 @@
 			$html = file_get_html('http://www.navhindtimes.in/category/goanews/');
 	
 			foreach($html->find('div.post-listing article.item-list h2.post-box-title a') as $e)
-			echo "<p>$e->innertext</p>";
+			echo "<p>$e->innertext</p>";	
 			?>	
 			
           </div>
