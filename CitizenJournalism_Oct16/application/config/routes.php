@@ -60,13 +60,14 @@ $route['news/redirectt/(:any)'] = 'news/redirectt/$1';
 $route['upload_1/do_upload'] = 'upload_1/do_upload';
 
 $route['news/search'] = 'news/search';
+$route['news/test'] = 'news/test';
 $route['news/headlines'] = 'news/headlines';
 $route['login/aboutus'] = 'login/aboutus';
 
 $route['news'] = 'news/index';
 $route['news/(:any)'] = 'news/view/$1';
 
-
+$route['forum/test'] = 'forum/test';
 $route['forum'] = 'forum/index';
 $route['forum/upload'] = 'forum/upload'; 
 $route['forum/(:any)'] = 'forum/view/$1';
