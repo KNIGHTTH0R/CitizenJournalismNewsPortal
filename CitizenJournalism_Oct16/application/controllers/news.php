@@ -12,7 +12,7 @@ class News extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		$this->load->library("pagination");
 		$this->load->library('table');
-		
+		$this->load->library('unit_test');
 	}
 
 	public function index()
@@ -113,6 +113,30 @@ class News extends CI_Controller {
 			//$this->view($id);
             redirect('news/'.$id);			
 		}		
+	}
+	
+	public function test()
+	{
+
+		//echo $this->unit->run($test, $expected_result, $test_name);
+		
+		echo $this->unit->run($this->news_model->get_news(),'is_array', 'Get News');
+		echo $this->unit->run($this->news_model->record_count(),'is_int', 'Get News Count');
+		echo $this->unit->run($this->news_model->fetch_news(0,5),'is_bool','Fetch News');
+		echo $this->unit->run($this->news_model->get_videos(),'is_array','Get Videos');
+		echo $this->unit->run($this->news_model->get_images(),'is_array','Get Images');
+		echo $this->unit->run($this->news_model->get_news_between(),'is_array','Get News Between');
+		echo $this->unit->run($this->news_model->get_multimedia(),'is_array','Get Multimedia');
+		echo $this->unit->run($this->news_model->get_searched_news(),'is_array','Get Searched News');
+		echo $this->unit->run($this->news_model->get_news_list(),'is_array','Get News List');
+
+		//echo $this->unit->run($this->news_model->set_news(),'is_string','Set News');
+		//echo $this->unit->run($this->news_model->update_news(16),'is_array','Get News List');
+		echo $this->unit->run($this->news_model->add_member(),'is_string','Add Member');
+		echo $this->unit->run($this->news_model->get_member_name(20),'is_string','Get Member Name');
+		echo $this->unit->run($this->news_model->get_member_info(5),'is_array','Get Member Info');
+		echo $this->unit->run($this->news_model->get_login(5),'is_array','Get Login');
+		echo $this->unit->run($this->news_model->get_last_news_id(),'is_int','Get Last News Id');
 	}
 	
 	
