@@ -22,7 +22,7 @@
 
     <div class="container" style="background-color:white;height:65em;border:1px solid black;margin-top:2em;">
         <div class="row">
-            <div style="background-color:#F0F0F5;height:62em;margin:2em;">
+            <div style="background-color:white;height:62em;margin:2em;">
 
                 <!form action="" method="post">
                 <div id ="register_form_error" class="alert alert-error"><!---------------------------------Dynamic --></div>
@@ -54,7 +54,7 @@
                                 <div style="margin-left:30%; "> 
 
                                     <!input type="file" name="userfile" style="color:transparent;" onchange="this.style.color = 'black';"/>
-                                    <input type="file" name="userfile" onchange="loadFile(event)">
+                                    <input type="file" name="userfile" onchange="loadFile(event)" required>
 
                                     <div><a href="#" class="btn-sm fileupload-exists" data-dismiss="fileupload" style="color:transparent;">Remove</a> </div></div>
                             </div>

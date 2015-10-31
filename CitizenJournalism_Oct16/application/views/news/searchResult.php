@@ -1,9 +1,21 @@
-<div class="wrapper row3">
+		<style type="text/css">
+			@font-face {
+				font-family: tamilFont1;
+				src:url("<?php echo base_url(); ?>fonts/hindi.ttf");
+			}
+			@font-face {
+				font-family: tamilFont2;
+				src:url("<?php echo base_url(); ?>fonts/hindi.ttf");
+			}
+		</style>
+		
+		<div class="wrapper row3">
   <div id="container">
     <!-- ################################################################################################ -->
-    <div id="homepage" class="clear">
+    <div id="homepage" class="clear" style="padding:18px;">
 	
-	<h1>Category</h1>
+	  	<h2 class="nospace"><strong>Category</strong></h2>
+	<div class="divide"></div>
 	<div id="body">
   
 
@@ -24,7 +36,7 @@
 			</div>
 			<div class="form-group">
 					<div class="">
-						<button type="submit" class="button small gradient blue rnd8" name="search" value="Search">Search</button>
+						<button type="submit" class="button small gradient orange rnd8" name="search" value="Search">Search</button>
 					</div>
 			</div>
 		</form>	
@@ -39,26 +51,39 @@
 	</form>	
 </div>
 -->
-<div style="padding:18px">
+
+
+
+<div style="color: #666666;">
 <?php foreach ($news as $news_item): ?>
 
     <h2><?php echo $news_item['title'] ?></h2>
-    <div class="main">
-        <?php echo $news_item['body'] ?>
-    </div>
+	<?php if($news_item['font']=="2"){
+				echo ' <div class="main" style="font-size:17px;font-family:tamilFont1">';
+				 echo $news_item['body'] ;
+				echo ' </div>';
+	}
+		 else{
+				echo ' <div class="main">';
+				 echo $news_item['body']; 
+				echo ' </div>';
+			 
+			 
+		 }
+	?>	 
 	
-	<p><a href="<?php echo base_url().'index.php/news/'.$news_item['n_id'] ?>">View article</a></p>
+	<p><a href="<?php echo base_url().'index.php/news/'.$news_item['n_id'] ?>"style="color:#FF9900;font-weight:bold;font-size:1.1em;">View article</a></p>
 	
 	
 	
 	<?php if($this->session->userdata('fname')==true && $this->session->userdata('role')=="admin"){ ?>
 		<div>
-			<a href="<?php echo base_url().'index.php/news/approve/'.$news_item['n_id'] ?>"><input type="button" value="Approve"></a>
-			<a href="<?php echo base_url().'index.php/news/delete/'.$news_item['n_id'] ?>"><input type="button" value="Delete"></a>
+			<a href="<?php echo base_url().'index.php/news/approve/'.$news_item['n_id'] ?>"><input class="button small gradient orange rnd8" type="button" value="Approve"></a>
+			<a href="<?php echo base_url().'index.php/news/delete/'.$news_item['n_id'] ?>"><input class="button small gradient orange rnd8" type="button" value="Delete"></a>
 		</div>
 	<?php } ?>
 	
-	
+	<br><br>
 <?php endforeach ?>
 </div>
 	</div>

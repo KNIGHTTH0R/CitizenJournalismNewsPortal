@@ -1,4 +1,13 @@
+  
+<?php
+//var_dump()
+    if($this->session->userdata('back_url')){                        // if user is not logged in redirect
+	       $back=$this->session->userdata('back_url');
+		   $this->session->unset_userdata('back_url');
+	        redirect($back, 'refresh');
+		}
 
+?> 
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -11,11 +20,11 @@
         <link rel="stylesheet"  href="<?= base_url() ?>public/style/style.css">
         <link rel="icon" type="image/ico" href="<?= base_url() ?>public/images/favicon.ico">
     </head>
-    <body style="background-color:#5c5c8a" >
-        <div class="well well-sm" style="font-size:2em; text-align:center;"><strong>Journalist Profile</strong></div>
-        <div class="container" style="background-color:white;height:65em;border:1px solid black;margin-top:2em;">
+    <body style="background-color:white" >
+        <div  class="well well-sm" style="font-size:2em; text-align:center;"><strong>Journalist Profile</strong></div>
+        <div class="container" id="container" style="height:65em;border:1px solid black;margin-top:2em;">
             <div class="row">
-                <div style="background-color:#F0F0F5;height:62em;margin:2em;">
+                <div style="height:62em;margin:2em;color:black;font-weight:bold;">
 
                     <!form action="" method="post">
                     <div id ="register_form_error" class="alert alert-error"><!---------------------------------Dynamic --></div>
@@ -41,8 +50,7 @@
                                     
                                     <div class="fileupload-preview thumbnail " style="width: 120px; height:120px;margin-left:auto;margin-right:auto;border:1px dashed #5c5c8a;">
                                         <img id="output" src="<?php echo base_url() . 'profile/' . $row->profile_image;  ?>"  />
-
-                                    </div>
+									</div>
                                 </div>
                             </div> 
 
@@ -51,7 +59,7 @@
 
                                     <div class="input-group">
                                                
-                                        Name * <input type="text" class="form-control" name="InputName" id="Name" value="<?= $row->fname . " " . $row->mname . " " . $row->lname;?> " readonly >
+                                        Name  <input type="text" class="rnd8 form-control input-group-lg" name="InputName" id="Name" value="<?= $row->fname . " " . $row->mname . " " . $row->lname;?> " readonly >
                                         
                                                
                                     </div>
@@ -61,7 +69,7 @@
                                 <div class="form-group">
 
                                     <div class="input-group">
-                                        Email * <input type="text" class="form-control" id="EmailFirst" name="InputEmail" value="<?= $row->email; ?>" readonly >
+                                        Email  <input type="text" class="rnd8 form-control input-group-lg" id="EmailFirst" name="InputEmail" value="<?= $row->email; ?>" readonly >
 
                                     </div>
                                 </div>
@@ -69,7 +77,7 @@
                                 <div class="form-group">
 
                                     <div class="input-group">
-                                        Mobile No. *<input type="text" class="form-control" name="InputMobile" id="Mobile" value="<?= $row->contact; ?>" readonly>
+                                        Mobile No. <input type="text" class="rnd8 form-control input-group-lg" name="InputMobile" id="Mobile" value="<?= $row->contact; ?>" readonly>
 
                                     </div>
                                 </div>
@@ -78,7 +86,7 @@
                                 <div class="form-group">
                                     <div class="input-group dob">
 
-                                        DOB *<input type="text" class="form-control" name="InputDOB" id="DOB" value="<?= $row->dob; ?>" readonly>	
+                                        DOB <input type="text" class="rnd8 form-control input-group-lg" name="InputDOB" id="DOB" value="<?= $row->dob; ?>" readonly>	
 
                                     </div>
                                 </div>
@@ -86,7 +94,7 @@
                                 <div class="form-group">
 
                                     <div class="input-group">
-                                        Address *<input type="text" class="form-control" name="InputAddress" id="Address" value="<?= $row->address_line; ?>" readonly>
+                                        Address <input type="text" class="rnd8 form-control input-group-lg" name="InputAddress" id="Address" value="<?= $row->address_line; ?>" readonly>
 
                                     </div>
                                 </div>
@@ -94,7 +102,7 @@
                                 <div class="form-group">
 
                                     <div class="input-group">
-                                        Pin *<input type="text" class="form-control" name="InputPin" id="postal_code" value="<?= $row->pin; ?>" readonly>
+                                        Pin <input type="text" class="form-control" name="InputPin" id="postal_code" value="<?= $row->pin; ?>" readonly>
 
                                     </div>
                                 </div>
@@ -102,7 +110,7 @@
                                 <div class="form-group">
 
                                     <div class="input-group">
-                                        City *<input type="text" class="form-control" name="InputCity" id="locality" value="<?= $row->city; ?>" readonly>
+                                        City <input type="text" class="rnd8 form-control input-group-lg" name="InputCity" id="locality" value="<?= $row->city; ?>" readonly>
 
                                     </div>
                                 </div>
@@ -110,7 +118,7 @@
                                 <div class="form-group">
 
                                     <div class="input-group">
-                                        State *<input type="text" class="form-control" name="InputState" id="administrative_area_level_1" value="<?= $row->state; ?>" readonly>
+                                        State <input type="text" class="rnd8 form-control input-group-lg" name="InputState" id="administrative_area_level_1" value="<?= $row->state; ?>" readonly>
 
                                     </div>
                                 </div>

@@ -20,14 +20,14 @@
 					}   
 					   ?>
 			
-			<h4><span class="label label-info">Email</span></h4><input id="email" type="email" name="email" value="">
+			<h4><span class="label label-default">Email</span></h4><input id="email" type="email" name="email" value="">
 			
-			<h4><span class="label label-info">Password</span></h4><input id="password" type="password" name="password" value="">
+			<h4><span class="label label-default">Password</span></h4><input id="password" type="password" name="password" value="">
 			<br>
 			
 
 
-			<br/><input type="submit" id="submit" name="submit" value="Login"/><input type="reset" id="reset" name="reset"/>
+			<br/><input type="submit" class="button medium gradient purple rnd8" id="submit" name="submit" value="Login"/><input type="reset" id="reset" name="reset"/>
      
 		</fieldset>
 	</form>

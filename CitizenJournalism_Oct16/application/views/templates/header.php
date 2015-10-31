@@ -1,3 +1,6 @@
+<?php
+$_SESSION['url'] = $_SERVER['REQUEST_URI']; 
+?>
 <!doctype html>
 <html>
 <head>
@@ -30,13 +33,19 @@
 	<script src="<?php echo base_url();?>css/rs-1200-prototype-50/layout/scripts/responsiveslides.js-v1.53/responsiveslides.min.js"></script>
 	<script src="<?php echo base_url();?>css/rs-1200-prototype-50/layout/scripts/jquery-mobilemenu.min.js"></script>
 	<script src="<?php echo base_url();?>css/rs-1200-prototype-50/layout/scripts/custom.js"></script>
+	<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+	<!--profile-->
+
+      
 </head>
 
 <body class="">
 <div class="wrapper row1">
   <header id="header" class="full_width clear">
     <div id="hgroup">
-      <h1><a href="index.html">Citizen Journalism</a></h1>
+      <h1><a href="<?php echo base_url().'index.php/news' ?>">Citizen Journalism</a></h1>
       <h2>Where The News Are Real</h2>
     </div>
     <div id="header-contact">

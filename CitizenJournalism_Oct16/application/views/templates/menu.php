@@ -76,9 +76,23 @@
         </ul>
       </li>
 	  
+	 
+       <li><a class="drop" href="<?php echo base_url().'index.php/news/search?q=general'; ?>" title="Forms">Category</a>
+        <ul>
+          <li><a href="<?php echo base_url().'index.php/news/search?q=state'; ?>" title="View Forums">State</a></li>
+          <li><a href="<?php echo base_url().'index.php/news/search?q=nation'; ?>" title="View Forums">Nation</a></li>
+		  <li><a href="<?php echo base_url().'index.php/news/search?q=sports'; ?>" title="View Forums">Sports</a></li>
+		  <li><a href="<?php echo base_url().'index.php/news/search?q=life'; ?>" title="View Forums">Life</a></li>
+          <li><a href="<?php echo base_url().'index.php/news/search?q=politics'; ?>" title="View Forums">Politics</a></li>
+		  <li><a href="<?php echo base_url().'index.php/news/search?q=education'; ?>" title="View Forums">Education</a></li>
+		  <li><a href="<?php echo base_url().'index.php/news/search?q=local'; ?>" title="View Forums">Local</a></li>
+		  <li><a href="<?php echo base_url().'index.php/news/search?q=general'; ?>" title="View Forums">General</a></li>
+        </ul>
+      </li>
 	  <li><a href="<?php echo base_url().'index.php/news/moderate'; ?>" title="Moderate">Moderate</a></li>
 	  <li><a href="<?php echo base_url().'index.php/news/upload'; ?>" title="Upload">Upload</a></li>
-	  <li><a href="<?php echo base_url().'index.php/login/moderate'; ?>" title="Profile">Profile</a></li>
+	  <li><a href="<?php echo base_url().'index.php/news/manageAds'; ?>" title="ads">Manage Ads</a></li>
+	  <li><a href="<?php echo base_url().'index.php/news/showProfile'; ?>" title="Profile">Profile</a></li>
 	  <li><a href="<?php echo base_url().'index.php/login/logout'; ?>" title="Sign Up">Logout</a></li>
     </ul>
   </nav>
@@ -118,8 +132,23 @@
           <li><a href="<?php echo base_url().'index.php/forum/upload'; ?>" title="Start Q&A">Start Q&A</a></li>
         </ul>
       </li>
+	  
+	 
+       <li><a class="drop" href="<?php echo base_url().'index.php/news/search?q=general'; ?>" title="Forms">Category</a>
+        <ul>
+          <li><a href="<?php echo base_url().'index.php/news/search?q=state'; ?>" title="View Forums">State</a></li>
+          <li><a href="<?php echo base_url().'index.php/news/search?q=nation'; ?>" title="View Forums">Nation</a></li>
+		  <li><a href="<?php echo base_url().'index.php/news/search?q=sports'; ?>" title="View Forums">Sports</a></li>
+		  <li><a href="<?php echo base_url().'index.php/news/search?q=life'; ?>" title="View Forums">Life</a></li>
+          <li><a href="<?php echo base_url().'index.php/news/search?q=politics'; ?>" title="View Forums">Politics</a></li>
+		  <li><a href="<?php echo base_url().'index.php/news/search?q=education'; ?>" title="View Forums">Education</a></li>
+		  <li><a href="<?php echo base_url().'index.php/news/search?q=local'; ?>" title="View Forums">Local</a></li>
+		  <li><a href="<?php echo base_url().'index.php/news/search?q=general'; ?>" title="View Forums">General</a></li>
+        </ul>
+      </li>
       <li><a href="<?php echo base_url().'index.php/news/managePosts/'.$this->session->userdata('m_id') ; ?>" title="Upload">Manage Posts</a></li>
 	  <li><a href="<?php echo base_url().'index.php/news/upload'; ?>" title="Upload">Upload</a></li>
+	  <li><a href="<?php echo base_url().'index.php/news/showProfile'; ?>" title="Profile">Profile</a></li>
 	  
 	  <li><a href="<?php echo base_url().'index.php/login/logout'; ?>" title="Sign Up">Logout</a></li>
     </ul>

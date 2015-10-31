@@ -113,6 +113,7 @@ class forum_model extends CI_Model {
 			return $row['cname'];
 			
     }
+	
 	 public function get_comment($slug = FALSE)
    { 
 		if ($slug == FALSE)
@@ -123,7 +124,9 @@ class forum_model extends CI_Model {
 			$query = $this -> db -> get();	
 			return $query->result_array();
 		}
-            $query = $this->db->get_where('comment', array('f_id' => $slug));
+		   $query = $this->db->query("select * from comment c,member m where c.m_id=m.m_id and c.f_id=".$slug);	
+			//$row=$query->row_array();
+           // $query = $this->db->get_where('comment', array('f_id' => $slug));
 	        return $query->result_array();
    }
    	
@@ -135,7 +138,8 @@ class forum_model extends CI_Model {
 				'f_id'=> $this->input->post('fpost'),
 				'comment' => $this->input->post('comment'),
 				'date' => date('Y/m/d'),
-				'time'=> date("h:m:sa")
+				'time'=> date("h:m:sa"),
+				'm_id' => $this->session->userdata('m_id')
 	        );
 	
 		    $this->db->insert('comment', $data);
@@ -148,6 +152,23 @@ class forum_model extends CI_Model {
 			return $this->input->post('fpost');
     }
 	
+	    public function record_count() {
+        return $this->db->count_all("forum");
+    }
+
+    public function fetch_forum($limit, $start) {
+        $this->db->limit(4, $start);
+        $query = $this->db->get("forum");
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+   }
+   
 	
    
  }  

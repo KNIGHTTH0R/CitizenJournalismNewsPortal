@@ -1,6 +1,6 @@
 <?php foreach ($comment as $comment_item): ?>
 
-    <div class="main">
+    <div class="main container backgroundimage" style="color:black;">
 	    <span class="mname"><?php echo $this->session->userdata('fname')." ".$this->session->userdata('mname')." ".$this->session->userdata('lname') ?></span>
         <?php echo $comment_item['comment'] ?>
 		<?php echo $comment_item['time']."  ".$comment_item['date'];?>
@@ -13,7 +13,7 @@
 
 	<form  id="forumCommentPost" name="forumCommentPost" action="commentPost" method="post"  enctype="multipart/form-data">
 
-	<h4><span class="label label-info">Comment : </span></h4><textarea rows="5" cols=30" name="comment"></textarea>
+	<h4><span class="label label-default">Comment : </span></h4><textarea rows="5" cols=30" name="comment"></textarea>
 
 	<input type="hidden" id="fpost" name="fpost" value="<?php echo $forum_item['f_id'];?>"/>
 	<input type="submit" id="submit" name="submit" value="Post"/>
@@ -22,6 +22,8 @@
 <?php
 }
 else{
-     echo "<h4>Login to comment</h4>";
+?>
+     <div class="alert-msg error">Please Login to comment</div>
+	 <?php
 }
 ?>

@@ -1,10 +1,14 @@
 
+		
 <div class="wrapper row3">
   <div id="container">
     <!-- ################################################################################################ -->
-    <div id="homepage" class="clear">
+    <div id="homepage" class="clear ">
+	<div class="screen-pad">
 
-  <h1 style="padding:18px;">News Archives</h1>
+  
+  	<h2 class="nospace"><strong>News Archives</strong></h2>
+	<div class="divide"></div>
   <div id="body">
   
 
@@ -25,30 +29,33 @@
 			</div>
 			<div class="form-group">
 					<div class="">
-						<button type="submit" class="button small gradient blue rnd8">Search</button>
+						<button type="submit" class="button small gradient orange rnd8">Search</button>
 					</div>
 			</div>
 		</form>	
 	</div>
 </div>
 
-<div style="padding:18px;">
-
+<div style="padding:28px;">
+<ul class="list arrow">
 <?php
 foreach($results as $data) {?>
-    <div style="border-bottom:1px solid black;">
-		<a href="<?php echo base_url().'index.php/news/'.$data->n_id ?>" style="color:#880000">
+    <div>
+		<li><a style="color:#777;font-size:18px;" href="<?php echo base_url().'index.php/news/'.$data->n_id ?>" >
 		<?php
-			echo $data->title . " - " . $data->body;   ?>
+			echo $data->title ;   ?>
 		</a>
+		</li>
 	</div>	
 	<?php
 }
 ?>
    <p><?php echo $links; ?></p>
+</ul>   
    </div>
   </div>
   <p class="footer" style="padding:18px">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+ </div>
  </div>
  </div>
  </div>

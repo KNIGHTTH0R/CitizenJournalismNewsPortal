@@ -18,12 +18,25 @@ class News extends CI_Controller {
 	public function index()
 	{
 		$data['news'] = $this->news_model->get_news();
+		
 		$data['newsBetween'] = $this->news_model->get_news_between();
 		$data['videos'] = $this->news_model->get_videos();
 		$data['images'] = $this->news_model->get_images();
-		$data['imagesAll'] = $this->news_model->get_all_images();
 		$data['title'] = 'News archive';
-
+		
+		$data['newsState'] = $this->news_model->get_news_by_category('State',3);
+		$data['newsNation'] = $this->news_model->get_news_by_category('Nation',3);
+		$data['newsSports'] = $this->news_model->get_news_by_category('Sports',3);
+		$data['newsLife'] = $this->news_model->get_news_by_category('Life',3);
+		
+		$data['newsPolitics'] = $this->news_model->get_news_by_category('Politics',3);
+		$data['newsEducation'] = $this->news_model->get_news_by_category('Education',3);
+		$data['newsLocal'] = $this->news_model->get_news_by_category('Local',3);
+		$data['newsGeneral'] = $this->news_model->get_news_by_category('General',3);
+		
+		$data['homeAds']=$this->news_model->get_ads_homepage();
+		
+		//var_dump($data['newsCat']);
 		$this->load->view('templates/header', $data);
 		$this->load->view('news/index', $data);
 		$this->load->view('templates/footer');
@@ -37,6 +50,18 @@ class News extends CI_Controller {
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('news/listNews', $data);
+		$this->load->view('templates/footer');
+	}
+	
+	public function selectAd($a_id)
+	{
+		$data['news'] = $this->news_model->select_ad($a_id);
+		$data['name'] = $this->news_model->get_ads();
+		$this->session->set_userdata('msg','Ad selected Successfully!'); 
+		$data['title'] = 'News archive';
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('manageAds', $data);
 		$this->load->view('templates/footer');
 	}
 	
@@ -55,6 +80,18 @@ class News extends CI_Controller {
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('news/listPosts', $data);
+		$this->load->view('templates/footer');
+	}
+	
+	
+	public function manageAds()
+	{
+		$data['name'] = $this->news_model->get_ads();
+		$data['title'] = 'News archive';
+
+		//var_dump($data);
+		$this->load->view('templates/header', $data);
+		$this->load->view('manageAds', $data);
 		$this->load->view('templates/footer');
 	}
 	
@@ -102,7 +139,7 @@ class News extends CI_Controller {
 			}
 			else
 				$mid=$this->news_model->add_member();	
-		    $id=$this->news_model->set_news($mid);
+				$id=$this->news_model->set_news($mid);
 			
 			
 			
@@ -115,7 +152,47 @@ class News extends CI_Controller {
 		}		
 	}
 	
-	public function test()
+	
+	
+	public function uploadAdvertise()
+    {
+		
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		$data['title'] = 'Advertise form';
+
+		$this->form_validation->set_rules('name', 'name', 'required');
+		
+		if ($this->form_validation->run() === FALSE)
+		{
+			$this->load->view('templates/header', $data);
+			$this->load->view('advertise');
+			$this->load->view('templates/footer');
+
+		}
+		else{
+			require_once('upload.php');
+			$upload=new upload();
+			$url=$upload->do_upload_advertise();
+			
+			$this->news_model->set_advertise($url);
+			$this->session->set_userdata('msg','Advertisement Request submitted Successfully!');
+			
+			$this->load->view('templates/header', $data);
+			$this->load->view('advertise');
+			$this->load->view('templates/footer');
+			
+		
+			//$this->view($id);
+            //redirect('news/'.$id);			
+		}		
+	}
+	
+	
+	
+	
+	public function tests()
 	{
 
 		//echo $this->unit->run($test, $expected_result, $test_name);
@@ -123,6 +200,7 @@ class News extends CI_Controller {
 		echo $this->unit->run($this->news_model->get_news(),'is_array', 'Get News');
 		echo $this->unit->run($this->news_model->record_count(),'is_int', 'Get News Count');
 		echo $this->unit->run($this->news_model->fetch_news(0,5),'is_bool','Fetch News');
+		echo $this->unit->run($this->news_model->fetch_news(10,5),'is_array','Fetch News');
 		echo $this->unit->run($this->news_model->get_videos(),'is_array','Get Videos');
 		echo $this->unit->run($this->news_model->get_images(),'is_array','Get Images');
 		echo $this->unit->run($this->news_model->get_news_between(),'is_array','Get News Between');
@@ -132,13 +210,12 @@ class News extends CI_Controller {
 
 		//echo $this->unit->run($this->news_model->set_news(),'is_string','Set News');
 		//echo $this->unit->run($this->news_model->update_news(16),'is_array','Get News List');
-		echo $this->unit->run($this->news_model->add_member(),'is_string','Add Member');
+		//echo $this->unit->run($this->news_model->add_member(),'is_string','Add Member');
 		echo $this->unit->run($this->news_model->get_member_name(20),'is_string','Get Member Name');
 		echo $this->unit->run($this->news_model->get_member_info(5),'is_array','Get Member Info');
 		echo $this->unit->run($this->news_model->get_login(5),'is_array','Get Login');
-		echo $this->unit->run($this->news_model->get_last_news_id(),'is_int','Get Last News Id');
+		echo $this->unit->run($this->news_model->get_last_news_id(),'is_string','Get Last News Id');
 	}
-	
 	
 	public function edit($n_id){                                                     // edit news post
 	
@@ -178,6 +255,20 @@ class News extends CI_Controller {
 	}
 	
 	
+	
+	public function showProfile(){ 
+            $this->load->view('templates/header');
+			$this->load->view('profile');
+			$this->load->view('templates/footer');	
+				
+	}
+	
+	public function advertise(){ 
+            $this->load->view('templates/header');
+			$this->load->view('advertise');
+			$this->load->view('templates/footer');	
+				
+	}
 	
 	public function approve($n_id){                                                  // admin approves an article / post
 	    		
@@ -236,6 +327,27 @@ class News extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 	
+		
+	public function searchForPosts()
+	{ 
+	    $category='';
+	    $slug=$this->input->post('searchTxt');
+		if(!$slug){
+		    $category = $this->input->get('q');
+		}
+		$dat = $this->input->post('date');
+	    $this->load->helper('form');	
+		
+		$data['news'] = $this->news_model->get_searched_news($slug,$dat,$category);
+		//var_dump($data['news']);
+		$data['title'] = 'News archive';
+        
+		$this->load->view('templates/header', $data);
+		$this->load->view('news/listPosts', $data);
+		$this->load->view('templates/footer');
+	}
+	
+	
 	public function category()
 	{ 
 		$data['news']=$this->category_model->get_category();
@@ -254,7 +366,7 @@ class News extends CI_Controller {
 	}
 	
 	
-	public function archives() {
+	public function archives($pgNo=false) {
 	   
         $config = array();
         $config["base_url"] = base_url() . "index.php/news/archives";

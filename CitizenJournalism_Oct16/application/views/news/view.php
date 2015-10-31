@@ -1,4 +1,15 @@
 
+		<style type="text/css">
+			@font-face {
+				font-family: tamilFont1;
+				src:url("<?php echo base_url(); ?>fonts/hindi.ttf");
+			}
+			@font-face {
+				font-family: tamilFont2;
+				src:url("<?php echo base_url(); ?>fonts/hindi.ttf");
+			}
+		</style>
+
 	<style>
 	#new{
 		position:relative;		
@@ -41,10 +52,29 @@
   <div id="container">
     <!-- ################################################################################################ -->
     <div id="homepage" class="clear">
+	
+<h2 class="nospace"><strong>News</strong></h2>
+	<div class="divide"></div>
+	<div style="float:right">
+<a href="javascript:fbShare('<?php echo $news_item['title']; ?>', 'Fb Share', 'Facebook share popup', 'http://goo.gl/dS52U', 520, 350)">
+<img src="<?php echo base_url().'css/fb.jpg'; ?>" class=" rnd8" style="height:30px; width:100px"/>
+</a>
+
+
+
+<p class="col-xs-5 col-xs-offset-1" id="custom-tweet-button"> 
+<a target="_blank" class="twitter-share-button shareButton twitter popup" href="http://twitter.com/share?text=<?php echo $news_item['title']; ?>"  data-text="<?php echo $news_item['title']; ?>" data-count="none" data-url="https://www.google.com">
+<img src="<?php echo base_url().'css/tweet.png'; ?>"  class="img-responsive rnd8" alt="" style="height:28px; width:160px" />
+</a> 
+</p>
+</div>
 <?php
 
 echo '<h2>'.$news_item['title'].'</h2>';
 ?>
+
+
+
  <div class="main">
    <div id="main_container">
    <?php foreach ($multimedia as $mult_item): ?>
@@ -76,10 +106,18 @@ echo '<h2>'.$news_item['title'].'</h2>';
   
   
  
-    
-<?php                                                //   news data
-echo $news_item['body'];
-echo "<div>By ".$name." - ".$news_item['time']."  ".$news_item['date']."</div>";
+    <br/>
+<?php
+if($news_item['font']=="2"){
+     echo "<div style='font-size:17px;font-family:tamilFont1'>".$news_item['body']."</div>";
+	// echo "hi";
+}	
+else{
+	echo "<div style='font-size:17px;'>".$news_item['body']."</div>";
+}
+
+echo "<br/>";
+echo "<div style='font-weight:bold;'>By ".$name." <span style='color:#FF9900'> - At :</span> ".$news_item['time']."  <span style='color:#FF9900'> On </span>".$news_item['date']."</div>";
 ?>
 
 <?php if($this->session->userdata('fname')==true && $this->session->userdata('role')=="admin"){ ?>
@@ -95,7 +133,7 @@ echo "<div>By ".$name." - ".$news_item['time']."  ".$news_item['date']."</div>";
 <?php } ?>
 
 
-
+</p>
 
 
 
@@ -104,6 +142,21 @@ echo "<div>By ".$name." - ".$news_item['time']."  ".$news_item['date']."</div>";
 </div>
 </div>
 </div>
+
+
+<script>
+    function fbShare(url, title, descr, image, winWidth, winHeight) {
+        var winTop = (screen.height / 2) - (winHeight / 2);
+        var winLeft = (screen.width / 2) - (winWidth / 2);
+        window.open('http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[summary]=' + descr + '&p[url]=' + url + '&p[images][0]=' + image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+    }
+</script>
+
+
+
+
+
+
 	<script>
 	function clicked(){
 	
@@ -121,7 +174,7 @@ echo "<div>By ".$name." - ".$news_item['time']."  ".$news_item['date']."</div>";
 	
 	cls_butn = document.createElement("img");
 	cls_butn.setAttribute("id", "close");
-	cls_butn.setAttribute("src","close.png");
+		cls_butn.setAttribute("src","<?php echo base_url();?>css/close.png");
 	cls_butn.setAttribute("onclick","close_focus()");
 	
 	newdiv.appendChild(cls_butn);

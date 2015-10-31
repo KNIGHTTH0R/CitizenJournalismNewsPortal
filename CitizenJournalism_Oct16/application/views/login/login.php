@@ -6,42 +6,57 @@ if($this->session->userdata('msg'))
 	    echo $this->session->userdata('msg');
    ?>   
 
-  
-		
-	
+
     
 
 <div class="wrapper row3">
   <div id="container">
     <!-- ################################################################################################ -->
-    <div id="homepage" class="clear">
+    <div id="homepage" class="clear" style="padding:18px;">
 
 	<form  id="uploadForm" name="uploadForm" action="login" method="post">
 
-		<fieldset id="field1">
+		<fieldset id="field1"  >
 
-			<legend align="center"><h2><span class="label label-primary">MEMBER LOGIN</span></h2></legend>
+				
+	
+	<div style="padding-left:250px;padding-right:250px;">
+	<h2 class="nospace"><strong>Login</strong></h2>
+	<div class="divide"></div>
+	<br/>
              <?php if($this->session->userdata('message')){
 	                   echo $this->session->userdata('message');
                        $this->session->unset_userdata('message');					   
 					}   
 					   ?>
 			
-			<h4><span class="label label-info">Email</span></h4><input id="email" type="email" name="email" value="">
-			<br>
-			<h4><span class="label label-info">Password</span></h4><input id="password" type="password" name="password" value="">
-			<br>
+			
 			
 
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" value="" required/>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope" style="color:#23527C"></span></span>
+                            </div>
+                        </div>			
+			
 
-			<br/><input class="button medium gradient blue rnd8" type="submit" id="submit" name="submit" value="Login"/>
-			<input class="button medium gradient purple rnd8" type="reset" id="reset" name="reset"/>
-     
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required/>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>			
+			
+		
+			<br/><input class="button small gradient orange rnd8" type="submit" id="submit" name="submit" value="Login"/>
+			<input class="button small gradient orange rnd8" type="reset" id="reset" name="reset"/>
+			</div>
 		</fieldset>
 	</form>
 	</div>
 	<div class="imagesClear"></div>
-	
+	</div>
   </div>
 
        

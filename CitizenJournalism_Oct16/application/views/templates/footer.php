@@ -11,8 +11,8 @@
      
       <nav class="footer_nav">
         <ul class="nospace">
-          <li><a href="#">Home Page</a></li>
-          <li><a href="#">Our Services</a></li>        
+          <li><a href="<?php echo base_url().'index.php/news'; ?>"" title="Homepage">Homepage</a></li>   
+          <li><a href="<?php echo base_url().'index.php/news/headlines'; ?>" title="Headlines">Headlines</a></li> 
         </ul>
       </nav>
     </div>
@@ -21,8 +21,8 @@
      
       <nav class="footer_nav">
         <ul class="nospace">
-          <li><a href="#">Meet the Team</a></li>
-          <li><a href="#">Blog</a></li>
+          <li><a class="drop" href="<?php echo base_url().'index.php/news/archives'; ?>" title="News">News</a></li>
+          
         </ul>
       </nav>
     </div>
@@ -31,8 +31,8 @@
       
       <nav class="footer_nav">
         <ul class="nospace">
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">Gallery</a></li>
+          <li> <a href="<?php echo base_url().'index.php/login/aboutus' ?>">About Us</a></li>
+          
         </ul>
       </nav>
     </div>
@@ -41,7 +41,8 @@
       
       <nav class="footer_nav">
         <ul class="nospace">
-		<li><a href="#">Portfolio</a></li>  
+		
+          <li><a class="drop" href="<?php echo base_url().'index.php/forum'; ?>" title="Forms">Forums</a></li>     
         </ul>
       </nav>
     </div>

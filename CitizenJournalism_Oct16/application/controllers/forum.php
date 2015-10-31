@@ -8,10 +8,13 @@ Class forum extends CI_Controller{
 		$this->load->library('session');
 		$this->load->helper('url');
 		$this->load->library('upload');
+		$this->load->library("pagination");
+		
 		$this->load->library('unit_test');
 	}
 
-	public function test()
+	
+	public function tests()
 	{
 
 		echo $this->unit->run($this->forum_model->get_forum(),'is_array', 'Get Forums');
@@ -20,17 +23,16 @@ Class forum extends CI_Controller{
 		echo $this->unit->run($this->forum_model->get_category_name(9),'is_string', 'Get category name');
 		echo $this->unit->run($this->forum_model->get_comment(),'is_array', 'Get comments');
 	}
-	
-	
-	public function index()
-	{
-		$data['forum'] = $this->forum_model->get_forum();
-		$data['title'] = 'News archive';
 
-		$this->load->view('templates/header', $data);
-		$this->load->view('forum/index', $data);
-		$this->load->view('templates/footer');
-	}
+	// public function index()
+	// {
+		// $data['forum'] = $this->forum_model->get_forum();
+		// $data['title'] = 'News archive';
+
+		// $this->load->view('templates/header', $data);
+		// $this->load->view('forum/index', $data);
+		// $this->load->view('templates/footer');
+	// }
 	
 	
 	
@@ -38,6 +40,7 @@ Class forum extends CI_Controller{
     {
 	    
 		if(!$this->session->userdata('fname')){                        // if user is not logged in redirect
+		    $this->session->set_userdata('back_url', 'forum/upload');
 		    $this->session->set_userdata('message', 'Please login to post in forums!');
 	        redirect('login', 'refresh');
 		}
@@ -128,6 +131,27 @@ Class forum extends CI_Controller{
 		$this->load->view('templates/footer');
 	}
 	
+	public function index($pgNo=false) {
+		
+	    $data['forum'] = $this->forum_model->get_forum();
+		 $data['title'] = 'Forum';
+        $config = array();
+        $config["base_url"] = base_url() . "index.php/forum/index";
+        $config["total_rows"] = $this->forum_model->record_count();
+        $config["per_page"] = 6;
+        $config["uri_segment"] = 3;
+		//var_dump($config);
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		var_dump($this->uri->segment(3));
+        $data["results"] = $this->forum_model->fetch_forum($config["per_page"], $page);
+        $data["links"] = $this->pagination->create_links();
+        
+		$this->load->view('templates/header', $data);
+		$this->load->view('forum/index', $data);
+		$this->load->view('templates/footer');
+	}
 	
 
 }

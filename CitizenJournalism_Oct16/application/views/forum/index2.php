@@ -7,7 +7,7 @@
 
 <legend align="center"><h2><span class="label label-primary">CITIZEN JOURNALISM</span></h2></legend>
 
-<br/><a href="<?php echo base_url().'index.php/forum/upload'?>"><input type="button" id="button" name="button" value="POST IN FORUM"/></a>
+<br/><a href="<?php echo base_url().'index.php/forum/upload'?>"><input style="color:black;font-size:1.5em;font-weight:bold;" type="button" id="button" name="button" value="POST IN FORUM"/></a>
      
 </fieldset>
 </form>
@@ -21,6 +21,6 @@
     <div class="main">
         <?php echo $forum_item['fpost'] ?>
     </div>
-    <p><a href="<?php echo base_url().'index.php/forum/'.$forum_item['f_id'] ?>">View Forum</a></p>
+    <p><a href="<?php echo base_url().'index.php/forum/'.$forum_item['f_id'] ?>" style="color:red;">View Forum</a></p>
 
 <?php endforeach ?>

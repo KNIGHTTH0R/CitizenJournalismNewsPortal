@@ -13,13 +13,19 @@ class news_model extends CI_Model {
 			$this -> db -> select('*');
 			$this -> db -> from('news');
 			$this->db->order_by("n_id","desc");
-			$this->db->limit('8');
+			$this->db->limit('5');
 			$query = $this -> db -> get();	
 			return $query->result_array();
 		}
 		   
             $query = $this->db->get_where('news', array('n_id' => $slug));
 	        return $query->row_array();
+   }
+   
+   public function get_news_by_category($slug = FALSE,$limit)
+   { 	   
+            $query = $this->db->query("select * from news n,category c where n.c_id=c.c_id and c.cname='".$slug."' order by n.n_id desc limit ".$limit);	
+			return $query->result_array();
    }
    
    public function get_videos()
@@ -98,6 +104,41 @@ class news_model extends CI_Model {
 	       
    }
    
+    public function get_ads()
+   { 
+		
+			$this -> db -> select('*');
+			$this -> db -> from('advertise');
+			$this->db->where("status","0");
+			$this->db->order_by("a_id","desc");
+			
+			$query = $this -> db -> get();	
+			return $query->result_array();	
+           
+	       
+   }
+   
+       public function get_ads_homepage()
+   { 
+		
+			$this -> db -> select('*');
+			$this -> db -> from('advertise');
+			$this->db->order_by("a_id","desc");
+			$this->db->where("status","1");
+			$this->db->limit('2');
+			$query = $this -> db -> get();	
+			return $query->result_array();	
+           
+	       
+   }
+   
+   
+    public function select_ad($a_id)
+   { 
+		   // $this->db->query("update advertise set status=0");
+			$this->db->query("update advertise set status=1 where a_id=".$a_id);			
+   }
+   
    
     public function record_count() {
         return $this->db->count_all("news");
@@ -121,14 +162,15 @@ class news_model extends CI_Model {
    public function set_news($mid = FALSE)
    {
 		$this->load->helper('url');
-		
+		var_dump($this->input->post('hidden'));
 		$data = array(
 				'title' => $this->input->post('title'),
 				'body' => $this->input->post('body'),
 				'c_id'=> $this->input->post('category'),
 				'date' => date('Y/m/d'),
 				'time'=> date("h:i:sa"),
-				'm_id' => $mid
+				'm_id' => $mid,
+				'font'=>$this->input->post('hidden')
 	        );
 	
 		    $this->db->insert('news', $data);
@@ -205,7 +247,7 @@ class news_model extends CI_Model {
        
 		$username = $this->input->post('email');
 		$password = $this->input->post('password');
-                // $password =hash('sha256', $password . SALT);
+        //$password =hash('sha256', $password . SALT);
 		
 		//var_dump($username);
 		$this -> db -> select('l_id,m_id,email, password');
@@ -244,4 +286,15 @@ class news_model extends CI_Model {
 			return $row['n_id'];
 			
     }
+	
+	
+   public function set_advertise($url)
+   {
+		$this->load->helper('url');
+				$name = $this->input->post('name')	;			
+			$this->db->query("update advertise set name='".$name."' where path='".$url."'");				
+		
+    }
+	
+	
 }   

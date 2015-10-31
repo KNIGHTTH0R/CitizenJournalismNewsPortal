@@ -40,12 +40,17 @@
 $route['test'] = 'test/index';
 $route['login'] = 'login/index';
 $route['login/logout'] = 'login/logout';
+$route['news/uploadAdvertise'] = 'news/uploadAdvertise';
 
+$route['news/showProfile'] = 'news/showProfile'; //-----profile
 $route['upload/do_upload'] = 'upload/do_upload';
+$route['upload/do_upload_advertise'] = 'upload/do_upload_advertise';
+
 $route['news/upload'] = 'news/upload';
 $route['news/archives'] = 'news/archives';
 $route['news/category'] = 'news/category';
-//$route['news/archives/(:any)'] = 'news/archives/$1';
+$route['news/archives/(:any)'] = 'news/archives/$1';
+$route['news/selectAd/(:any)'] = 'news/selectAd/$1';
 $route['news/do_upload'] = 'news/do_upload';
 $route['news/moderate'] = 'news/moderate';
 $route['news/viewVideo'] = 'news/viewVideo';
@@ -56,18 +61,22 @@ $route['news/delete/(:any)'] = 'news/delete/$1';
 $route['news/deleteMedia/(:num)/(:any)'] = 'news/deleteMedia/$1/$2';
 $route['news/edit/(:any)'] = 'news/edit/$1';
 $route['news/redirectt/(:any)'] = 'news/redirectt/$1';
+$route['news/advertise'] = 'news/advertise';
 
 $route['upload_1/do_upload'] = 'upload_1/do_upload';
 
 $route['news/search'] = 'news/search';
-$route['news/test'] = 'news/test';
+$route['news/manageAds'] = 'news/manageAds';
+$route['news/tests'] = 'news/tests';
 $route['news/headlines'] = 'news/headlines';
 $route['login/aboutus'] = 'login/aboutus';
 
 $route['news'] = 'news/index';
 $route['news/(:any)'] = 'news/view/$1';
 
-$route['forum/test'] = 'forum/test';
+$route['forum/index'] = 'forum/index';
+$route['forum/index/(:any)'] = 'forum/index/$1';
+$route['forum/tests'] = 'forum/tests';
 $route['forum'] = 'forum/index';
 $route['forum/upload'] = 'forum/upload'; 
 $route['forum/(:any)'] = 'forum/view/$1';

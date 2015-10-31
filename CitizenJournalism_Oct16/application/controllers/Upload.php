@@ -30,7 +30,7 @@ class Upload extends CI_Controller {
 			if ( ! $this->upload->do_upload($key))
 			{
 				$error = array('error' => $this->upload->display_errors());
-                var_dump($error);
+               // var_dump($error);
 				//$this->load->view('upload_form', $error);
 			}
 			else
@@ -55,5 +55,52 @@ class Upload extends CI_Controller {
 			}
 		}
 	}
+	
+	
+	
+	function do_upload_advertise()
+	{
+			
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png|bmp';
+		$config['max_size']	= '100000';
+		$config['max_width']  = '2000';
+		$config['max_height']  = '2000';
+
+		$this->load->library('upload', $config);
+
+		//var_dump($_FILES);
+		foreach ($_FILES as $key => $value) {
+//var_dump($value);
+			if ( ! $this->upload->do_upload($key))
+			{
+				
+				$error = array('error' => $this->upload->display_errors());
+                var_dump($error);
+				//echo "hi";
+				$this->load->view('upload_form', $error);
+			}
+			else
+			{//echo "hi in else";
+				$data = array('upload_data' => $this->upload->data());
+                //echo "data";
+				//var_dump($data);
+				
+				 $advData = array(
+				
+					'path'=> "uploads/".$data['upload_data']['file_name']
+					
+				  );
+				 // var_dump($advData);
+				  $this->session->set_userdata('msg','Advertisement Request submitted Successfully!');
+				  $this->db->insert('advertise', $advData);
+				//$this->load->view('upload_success', $data);
+				return($advData['path']);
+			}
+		}
+		return "";
+	}
+	
+	
 }
 ?>
