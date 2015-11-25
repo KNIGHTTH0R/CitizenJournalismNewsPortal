@@ -51,6 +51,8 @@ $route['news/archives'] = 'news/archives';
 $route['news/category'] = 'news/category';
 $route['news/archives/(:any)'] = 'news/archives/$1';
 $route['news/selectAd/(:any)'] = 'news/selectAd/$1';
+$route['news/rejectAd/(:any)'] = 'news/rejectAd/$1';
+$route['news/deleteAd/(:any)'] = 'news/deleteAd/$1';
 $route['news/do_upload'] = 'news/do_upload';
 $route['news/moderate'] = 'news/moderate';
 $route['news/viewVideo'] = 'news/viewVideo';
@@ -60,6 +62,8 @@ $route['news/approve/(:any)'] = 'news/approve/$1';
 $route['news/delete/(:any)'] = 'news/delete/$1';
 $route['news/deleteMedia/(:num)/(:any)'] = 'news/deleteMedia/$1/$2';
 $route['news/edit/(:any)'] = 'news/edit/$1';
+$route['news/report/(:any)'] = 'news/report/$1';
+$route['news/showReasons/(:any)'] = 'news/showReasons/$1';
 $route['news/redirectt/(:any)'] = 'news/redirectt/$1';
 $route['news/advertise'] = 'news/advertise';
 
@@ -67,6 +71,7 @@ $route['upload_1/do_upload'] = 'upload_1/do_upload';
 
 $route['news/search'] = 'news/search';
 $route['news/manageAds'] = 'news/manageAds';
+$route['news/manageReported'] = 'news/manageReported';
 $route['news/tests'] = 'news/tests';
 $route['news/headlines'] = 'news/headlines';
 $route['login/aboutus'] = 'login/aboutus';

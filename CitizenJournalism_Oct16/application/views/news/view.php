@@ -1,5 +1,209 @@
+	<!-- Add jQuery library -->
+	<script type="text/javascript" src="../../js/lib/jquery-1.10.1.min.js"></script>
 
-		<style type="text/css">
+	<!-- Add mousewheel plugin (this is optional) -->
+	<script type="text/javascript" src="../../js/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+
+	<!-- Add fancyBox main JS and CSS files -->
+	<script type="text/javascript" src="../../js/source/jquery.fancybox.js?v=2.1.5"></script>
+	<link rel="stylesheet" type="text/css" href="../../js/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+
+	<!-- Add Button helper (this is optional) -->
+	<link rel="stylesheet" type="text/css" href="../../js/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+	<script type="text/javascript" src="../../js/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+
+	<!-- Add Thumbnail helper (this is optional) -->
+	<link rel="stylesheet" type="text/css" href="../../js/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+	<script type="text/javascript" src="../../js/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+
+	<!-- Add Media helper (this is optional) -->
+	<script type="text/javascript" src="../../js/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+			 *  Simple image gallery. Uses default settings
+			 */
+
+			$('.fancybox').fancybox();
+
+			/*
+			 *  Different effects
+			 */
+
+			// Change title type, overlay closing speed
+			$(".fancybox-effects-a").fancybox({
+				helpers: {
+					title : {
+						type : 'outside'
+					},
+					overlay : {
+						speedOut : 0
+					}
+				}
+			});
+
+			// Disable opening and closing animations, change title type
+			$(".fancybox-effects-b").fancybox({
+				openEffect  : 'none',
+				closeEffect	: 'none',
+
+				helpers : {
+					title : {
+						type : 'over'
+					}
+				}
+			});
+
+			// Set custom style, close if clicked, change title type and overlay color
+			$(".fancybox-effects-c").fancybox({
+				wrapCSS    : 'fancybox-custom',
+				closeClick : true,
+
+				openEffect : 'none',
+
+				helpers : {
+					title : {
+						type : 'inside'
+					},
+					overlay : {
+						css : {
+							'background' : 'rgba(238,238,238,0.85)'
+						}
+					}
+				}
+			});
+
+			// Remove padding, set opening and closing animations, close if clicked and disable overlay
+			$(".fancybox-effects-d").fancybox({
+				padding: 0,
+
+				openEffect : 'elastic',
+				openSpeed  : 150,
+
+				closeEffect : 'elastic',
+				closeSpeed  : 150,
+
+				closeClick : true,
+
+				helpers : {
+					overlay : null
+				}
+			});
+
+			/*
+			 *  Button helper. Disable animations, hide close button, change title type and content
+			 */
+
+			$('.fancybox-buttons').fancybox({
+				openEffect  : 'none',
+				closeEffect : 'none',
+
+				prevEffect : 'none',
+				nextEffect : 'none',
+
+				closeBtn  : false,
+
+				helpers : {
+					title : {
+						type : 'inside'
+					},
+					buttons	: {}
+				},
+
+				afterLoad : function() {
+					this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
+				}
+			});
+
+
+			/*
+			 *  Thumbnail helper. Disable animations, hide close button, arrows and slide to next gallery item if clicked
+			 */
+
+			$('.fancybox-thumbs').fancybox({
+				prevEffect : 'none',
+				nextEffect : 'none',
+
+				closeBtn  : false,
+				arrows    : false,
+				nextClick : true,
+
+				helpers : {
+					thumbs : {
+						width  : 50,
+						height : 50
+					}
+				}
+			});
+
+			/*
+			 *  Media helper. Group items, disable animations, hide arrows, enable media and button helpers.
+			*/
+			$('.fancybox-media')
+				.attr('rel', 'media-gallery')
+				.fancybox({
+					openEffect : 'none',
+					closeEffect : 'none',
+					prevEffect : 'none',
+					nextEffect : 'none',
+
+					arrows : false,
+					helpers : {
+						media : {},
+						buttons : {}
+					}
+				});
+
+			/*
+			 *  Open manually
+			 */
+
+			$("#fancybox-manual-a").click(function() {
+				$.fancybox.open('1_b.jpg');
+			});
+
+			$("#fancybox-manual-b").click(function() {
+				$.fancybox.open({
+					href : 'iframe.html',
+					type : 'iframe',
+					padding : 5
+				});
+			});
+
+			$("#fancybox-manual-c").click(function() {
+				$.fancybox.open([
+					{
+						href : '1_b.jpg',
+						title : 'My title'
+					}, {
+						href : '2_b.jpg',
+						title : '2nd title'
+					}, {
+						href : '3_b.jpg'
+					}
+				], {
+					helpers : {
+						thumbs : {
+							width: 75,
+							height: 50
+						}
+					}
+				});
+			});
+
+
+		});
+	</script>
+	<style type="text/css">
+		.fancybox-custom .fancybox-skin {
+			box-shadow: 0 0 50px #222;
+		}
+
+
+	</style>
+	
+			<style type="text/css">
 			@font-face {
 				font-family: tamilFont1;
 				src:url("<?php echo base_url(); ?>fonts/hindi.ttf");
@@ -10,49 +214,18 @@
 			}
 		</style>
 
-	<style>
-	#new{
-		position:relative;		
-	}
-	
-	.focus{
-	position:absolute;
-	width:700px;
-	height:600px;	
-	margin-left:300px;
-	margin-top:-350px;
-	}
-	
-	#close{
-	border:1px solid black;
-	width:20px;
-	height:20px;
-	position:absolute;
-	margin-top:0px;
-	margin-left:575px;
-	opacity:0.2;
-	z-index:2;
-	}
-	
-	#close:hover{
-	opacity:1;
-	}
-	
-	.disabled{
-	pointer-events:none;
-	opacity:0.5;
-	
-	}
-	
-	
-	
-	</style>
-	
+		
+	   
 <div class="wrapper row3">
   <div id="container">
     <!-- ################################################################################################ -->
     <div id="homepage" class="clear">
-	
+	<div style="color:green;font-size:20px;">
+	     <?php
+				echo $this->session->userdata('message'); 
+				$this->session->unset_userdata('message');		   
+         ?>	
+	</div>
 <h2 class="nospace"><strong>News</strong></h2>
 	<div class="divide"></div>
 	<div style="float:right">
@@ -81,17 +254,18 @@ echo '<h2>'.$news_item['title'].'</h2>';
 
       <?php if(substr($mult_item['type'],0,5)=="image"){ ?>
 						
-				<div class="back">	
-				     <img class="multimedia" src="<?php echo base_url().''.$mult_item['url'] ?>" style="height:150px;width:150px;" onclick= "clicked()"/>
-				
-				</div>
+	<p>
+		<a class="fancybox-effects-a" href="<?php echo base_url().''.$mult_item['url'] ?>"  title="">
+		<img src="<?php echo base_url().''.$mult_item['url'] ?>" alt="" style="height:150px;width:150px;" onclick= "clicked()"/></a>
+
+	</p>		
 			   
 	  <?php } ?>
 	  
 	  
       <?php if(substr($mult_item['type'],0,5)!="image"){ ?>
 			<div class="back">
-                <a href="<?php echo base_url().''.$mult_item['url'] ?>">
+                <a href="<?php echo base_url().''.$mult_item['url'] ?>" target="_blank">
 					<img name="<?php echo base_url().''.$mult_item['url'] ?>" class="multimedia" src="<?php echo base_url().'uploads/default.jpg'?>" style="height:150px;width:150px;"/>
                 </a>		
 		</div>
@@ -130,10 +304,24 @@ echo "<div style='font-weight:bold;'>By ".$name." <span style='color:#FF9900'> -
 <div id="edit">
      <a href="<?php echo base_url().'index.php/news/edit/'.$news_item['n_id']; ?>">  Edit this post</a>
 </div>
+
 <?php } ?>
 
+<div id="report">
+     
+	 <a href="#" onclick="show(this.id);"><input class="button small gradient orange rnd8" type="button" value="Report this Article!"></a>
+</div>
 
 </p>
+
+<div id="reason" style="display:none;">
+	<form name="reason" id="reasonFrm" method="post" action="<?php echo base_url().'index.php/news/report/'.$news_item['n_id']; ?>"/>
+		<textarea class="form-control" placeholder="Enter Reason"
+		rows="5" cols=30" name="reason" required></textarea>
+		<input type="email" name="email" id="email"  placeholder="Enter Email"/>
+			<input class="button medium gradient orange rnd8" type="submit" id="submit" name="submit" value="Report"/>
+	</form>
+</div>
 
 
 
@@ -150,6 +338,11 @@ echo "<div style='font-weight:bold;'>By ".$name." <span style='color:#FF9900'> -
         var winLeft = (screen.width / 2) - (winWidth / 2);
         window.open('http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[summary]=' + descr + '&p[url]=' + url + '&p[images][0]=' + image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
     }
+	
+	function show(idd){
+	     document.getElementById('reason').style.display="block";
+		 //idd.style.display="none";
+	}
 </script>
 
 
@@ -157,81 +350,3 @@ echo "<div style='font-weight:bold;'>By ".$name." <span style='color:#FF9900'> -
 
 
 
-	<script>
-	function clicked(){
-	
-	newdiv = document.createElement("div");
-	newdiv.setAttribute("class","focus");
-	newdiv.setAttribute("id", "focused");
-
-	
-	new_img = document.createElement("img");
-	img_src=event.target.src;
-	//alert(img_src);
-	new_img.setAttribute("src",img_src);
-	new_img.style.width =600+"px";
-    new_img.style.height =500+"px";
-	
-	cls_butn = document.createElement("img");
-	cls_butn.setAttribute("id", "close");
-		cls_butn.setAttribute("src","<?php echo base_url();?>css/close.png");
-	cls_butn.setAttribute("onclick","close_focus()");
-	
-	newdiv.appendChild(cls_butn);
-	newdiv.appendChild(new_img);
-	
-	document.getElementById("new").appendChild(newdiv);
-	document.getElementById("main_container").blur();
-	
-	document.getElementById("main_container").setAttribute("class","disabled");
-	//document.getElementById("new").removeAttribute("class","disabled");
-
-	//document.getElementById("focused").focus();
-	}
-	
-	function clickedVideo(){                                    // video
-	
-	newdiv = document.createElement("div");
-	newdiv.setAttribute("class","focus");
-	newdiv.setAttribute("id", "focused");
-
-	
-	new_img = document.createElement("iframe");
-	img_src=event.target.name;
-	//alert(img_src);
-	new_img.setAttribute("src",img_src);
-	
-	new_img.style.width =600+"px";
-    new_img.style.height =500+"px";
-	
-	cls_butn = document.createElement("img");
-	cls_butn.setAttribute("id", "close");
-	cls_butn.setAttribute("src","close.png");
-	cls_butn.setAttribute("onclick","close_focus()");
-	
-	newdiv.appendChild(cls_butn);
-	
-	newdiv.appendChild(cls_butn);
-	newdiv.appendChild(new_img);
-	
-	document.getElementById("new").appendChild(newdiv);
-	document.getElementById("main_container").blur();
-	
-	document.getElementById("main_container").setAttribute("class","disabled");
-	//document.getElementById("new").removeAttribute("class","disabled");
-
-	//document.getElementById("focused").focus();
-	}
-	
-	function call(){
-	//alert("hello");
-	}
-	
-	function close_focus() {
-            newdiv = document.getElementById("new");
-			child = document.getElementById("focused");				
-          	newdiv.removeChild(document.getElementById("focused"));
-			document.getElementById("main_container").removeAttribute("class","disabled");
-        }
-	
-	</script>

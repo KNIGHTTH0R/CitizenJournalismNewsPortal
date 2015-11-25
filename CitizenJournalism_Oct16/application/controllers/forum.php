@@ -144,7 +144,7 @@ Class forum extends CI_Controller{
         $this->pagination->initialize($config);
 
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		var_dump($this->uri->segment(3));
+		//var_dump($this->uri->segment(3));
         $data["results"] = $this->forum_model->fetch_forum($config["per_page"], $page);
         $data["links"] = $this->pagination->create_links();
         

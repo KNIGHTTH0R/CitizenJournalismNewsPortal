@@ -11,7 +11,11 @@
 		</style>
 		
 		
-
+<div id="google_translate_element"></div><script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'fr,gu,hi,mr,pt', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
 
@@ -31,8 +35,11 @@
           <div class="rslides_container clear" style="width:650px;height:400px;">
             <ul class="rslides clear" id="rslides">
 			<?php foreach ($images as $news_item): ?>
-              <li><img class="multimedia" src="<?php echo base_url().''.$news_item['url'] ?>" ></li>
-             
+              <li>
+              	<img class="multimedia" src="<?php echo base_url().''.$news_item['url'] ?>" >
+              	<div style="position:absolute;background:rgba(0, 0, 0, .7);color:white;margin:340px 10px;font-size:15px;width:625px;height:50px;"><a style="margin:10px 15px;color:#FF9900;" href="<?php echo base_url().'index.php/news/'.$news_item['n_id'] ?>"> <?php echo $news_item['title']; ?> </a> </div>
+              </li>
+              
 			  <?php endforeach ?>
             </ul>
           </div>
@@ -468,18 +475,24 @@
    
 	   
 	</div>
-		   <div class="one_third">
+		    <div class="one_third">
 					   
 			<div class="tab-wrapper clear">
 				  
 				<div class="tab-container">
 
 				<div id="tab-1" class="tab-content clear">
-				<div><a href="<?php echo base_url().'index.php/news/advertise'; ?>" title="ads">Business Ads</a></div>
-				<?php foreach ($homeAds as $homeAd): ?>
-					<img class="multimedia" style="height:300px; width:250px" src="<?php echo base_url().''.$homeAd['path'] ?>" >
+				<div><p style="color:#FF9900;"> Business Ads </p></div>
+				<?php
+					//var_dump($homeAds);
+				if(count($homeAds) == 0)
+					echo "No Ads to Display";
+				 foreach ($homeAds as $homeAd): ?>
+					 <!--<div style="margin:10px 10px;position:relative;">-->
+						<img class="multimedia" style="height:240px; width:190px;margin:10px 10px;" src="<?php echo base_url().''.$homeAd['path'] ?>" >
+					
 				<?php endforeach ?>
-
+				<div style="margin:10px 10px;font-size:12px;color:#FF9900;"> Want your Ads to be displayed?</br><a href="<?php echo base_url().'index.php/news/advertise'; ?>" title="ads">click here!</a> </div>
 				</div>
 			   </div>
 			</div>
@@ -506,16 +519,23 @@
 			</div>
         </div>
 		
-        <div class="accordion-wrapper"><a href="javascript:void(0)" class="accordion-title orange"><span>Navhind Times</span></a>
+        <div class="accordion-wrapper"><a href="javascript:void(0)" class="accordion-title orange"><span>Herald Goa</span></a>
           <div class="accordion-content">
             <?php
 		
 
-			$html = file_get_html('http://www.navhindtimes.in/category/goanews/');
-	
-			foreach($html->find('div.post-listing article.item-list h2.post-box-title a') as $e)
-			echo "<p>$e->innertext</p>";	
+			//$html = file_get_html('http://www.navhindtimes.in/category/goanews/');
 			
+			$html = file_get_html('http://www.heraldgoa.in/index.php');
+			$i=0;
+			foreach($html->find('div#home-right ul.top-news a') as $e)
+			{
+				if($i < 5)
+				{
+					echo "<p>$e->innertext</p>";
+					$i++;
+				}
+			}
 			?>	
 			
           </div>

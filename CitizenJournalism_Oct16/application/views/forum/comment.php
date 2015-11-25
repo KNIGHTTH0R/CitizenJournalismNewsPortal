@@ -3,7 +3,7 @@
 <div class="wrapper row3">
   <div id="container">
     <!-- ################################################################################################ -->
-    <div id="homepage" class="clear">	
+    <div id="homepage" class="clear"  ng-app="myApp">	
 	<div class="screen-pad">
 		<div class="screen-pad">
 	 <div class="tab-wrapper clear" style="background-color:#f9f9f9;">
@@ -32,13 +32,17 @@
 
 <?php if($this->session->userdata('fname')){?>
 
-	<form  id="forumCommentPost" name="forumCommentPost" action="commentPost" method="post"  enctype="multipart/form-data">
+	<form  id="forumCommentPost" name="forumCommentPost" action="commentPost" method="post"  enctype="multipart/form-data"  ng-submit="submitForm(forumCommentPost.$valid)" novalidate>
 
 	<h4><span class="label label-default">Comment : </span></h4>
-	<textarea rows="5" cols=30" name="comment"></textarea>
-
+		<div class="form-group"  ng-class="{ 'has-error' :forumCommentPost.comment.$invalid && !forumCommentPost.comment.$pristine }"  >
+		<h4  style="clear:both;" >
+		<textarea class="form-control" placeholder="Enter Comment" ng-class="{ 'has-error' :forumCommentPost.comment.$invalid && !forumCommentPost.comment.$pristine }" 
+		rows="5" cols=30" name="comment" ng-model="comment"  required></textarea>
+	</div>
+	
 	<input type="hidden" id="fpost" name="fpost" value="<?php echo $forum_item['f_id'];?>"/>
-	<input class="button medium gradient orange rnd8" type="submit" id="submit" name="submit" value="Post"/>
+	<input class="button medium gradient orange rnd8" type="submit" id="submit" name="submit" value="Post" ng-disabled="forumCommentPost.$invalid"/>
 			 
 	</form>
 <?php
@@ -63,3 +67,14 @@ else{
 	
 	
 	</div>
+	<script>
+	
+var app = angular.module('myApp', []);
+	
+	
+  // function to submit the form after all validation has occurred            
+ 
+
+
+
+	</script>

@@ -90,10 +90,11 @@
         </ul>
       </li>
 	  <li><a href="<?php echo base_url().'index.php/news/moderate'; ?>" title="Moderate">Moderate</a></li>
+	  <li><a href="<?php echo base_url().'index.php/news/manageReported'; ?>" title="Moderate">Reported Articles</a></li>
 	  <li><a href="<?php echo base_url().'index.php/news/upload'; ?>" title="Upload">Upload</a></li>
 	  <li><a href="<?php echo base_url().'index.php/news/manageAds'; ?>" title="ads">Manage Ads</a></li>
 	  <li><a href="<?php echo base_url().'index.php/news/showProfile'; ?>" title="Profile">Profile</a></li>
-	  <li><a href="<?php echo base_url().'index.php/login/logout'; ?>" title="Sign Up">Logout</a></li>
+	  <li><a href="<?php echo base_url().'index.php/login/logout'; ?>" title="Sign Up">Logout (<?php echo $this->session->userdata('fname'); ?>)</a></li>
     </ul>
   </nav>
 </div>
@@ -150,7 +151,7 @@
 	  <li><a href="<?php echo base_url().'index.php/news/upload'; ?>" title="Upload">Upload</a></li>
 	  <li><a href="<?php echo base_url().'index.php/news/showProfile'; ?>" title="Profile">Profile</a></li>
 	  
-	  <li><a href="<?php echo base_url().'index.php/login/logout'; ?>" title="Sign Up">Logout</a></li>
+	  <li><a href="<?php echo base_url().'index.php/login/logout'; ?>" title="Sign Up">Logout (<?php echo $this->session->userdata('fname'); ?>)</a></li>
     </ul>
   </nav>
 </div>

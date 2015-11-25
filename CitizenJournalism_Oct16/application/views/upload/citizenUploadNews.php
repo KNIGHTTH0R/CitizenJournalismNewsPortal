@@ -1,8 +1,10 @@
 <?php echo validation_errors(); 
     //var_dump($this->session->all_userdata());
-	//echo hash('sha256', 'nazeef' . SALT);
-     if($this->session->userdata('name'))
+	$email="";
+     if($this->session->userdata('name')){
 	    $author=$this->session->userdata('fname')." ".$this->session->userdata('mname')." ".$this->session->userdata('lname');
+		$email=$this->session->userdata('email');
+	}	
      else
 	    $author="Anon";
 	
@@ -23,7 +25,6 @@
     <!-- ################################################################################################ -->
     <div id="homepage" class="clear">
 <div class="screen-pad">
-
 <form  id="uploadForm" name="uploadForm" action="upload" method="post"  enctype="multipart/form-data" ng-submit="submitForm(uploadForm.$valid)" novalidate>
 
 	<fieldset id="field1">
@@ -90,6 +91,21 @@
 
 		
 		<br/>
+		
+			<div class="form-group">
+                 <div class="input-group">
+                     <input  id="email" type="email" value="<?php echo $email;?>" class="form-control " ng-model="email.email" placeholder="Enter Email" name="email" ng-class="{ 'has-error' : uploadForm.email.$invalid && !uploadForm.email.$pristine } required"/>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span>
+					</span>
+                </div>
+				  <p style="color:red" ng-show="uploadForm.email.$error.required" class="help-block">required</p>
+      <p style="color:red" ng-show="uploadForm.email.$error.email" class="help-block" >invalid email</p>
+
+            </div>
+			
+			
+			
+			
                         <div class="form-group">
                             <div class="input-group" ng-app="myApp" ng-controller="customersCtrl">
                                 <select id="category"  class="form-control " name="category">
@@ -107,9 +123,8 @@
 	
 	<div class="form-group"  ng-class="{ 'has-error' :uploadForm.body.$invalid && !uploadForm.body.$pristine }"  >
 		<h4  style="clear:both;" >
-		<textarea class="form-control" id="body" placeholder="Enter news" ng-class="{ 'has-error' :uploadForm.body.$invalid && !uploadForm.body.$pristine }" rows="12" cols="150" name="body" ng-model="body" ng-minlength="20" ng-maxlength="300" required></textarea>
+		<textarea class="form-control" id="body" placeholder="Enter news" ng-class="{ 'has-error' :uploadForm.body.$invalid && !uploadForm.body.$pristine }" rows="12" cols="150" name="body" ng-model="body" ng-minlength="20"  required></textarea>
 		 <p ng-show="uploadForm.body.$error.minlength" class="help-block">News cannot be shorter than 20 characters.</p>
-		 <p ng-show="uploadForm.body.$error.maxlength" class="help-block">News cannot be longer than 300 characters.</p>
 	</div>
 
 <!---Hidden-->

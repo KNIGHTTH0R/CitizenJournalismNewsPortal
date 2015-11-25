@@ -20,15 +20,19 @@ foreach($html->find('div.top-story ul.list8 a') as $e)
      echo '</ul>';
      echo '   <!-- --></li>';
 	
-$html = file_get_html('http://www.navhindtimes.in/category/goanews/');
+$html = file_get_html('http://www.heraldgoa.in/index.php');
 echo ' <br>';
 echo '<li>';
-       echo' <h2 style="color:#585858;font-size:17px;">Navhind Times</h2>';
+       echo' <h2 style="color:#585858;font-size:17px;">Herald Goa</h2>';
        echo ' <ul class="list arrow">';
 	
-foreach($html->find('div.post-listing article.item-list h2.post-box-title a') as $e)
-    echo '<li style="color:#6E6E6E;font-size:16px;">'.$e->innertext . '</li>';	
-	     
+        $i=0;
+		foreach($html->find('div#home-right ul.top-news a') as $e){
+			if($i < 5){
+				echo '<li style="color:#6E6E6E;font-size:16px;">'.$e->innertext . '</li>';	
+			    $i++;
+			}	
+	     }
      echo '</ul>';
      echo '   <!-- --></li>';
 ?>	

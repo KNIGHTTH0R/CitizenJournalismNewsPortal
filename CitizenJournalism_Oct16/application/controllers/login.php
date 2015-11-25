@@ -48,7 +48,8 @@ class Login extends CI_Controller {
                    'name'  => $name,
                    'logged_in' => TRUE,
 				   'm_id' => $m_id,
-				   'l_id' => $data['row']['l_id']
+				   'l_id' => $data['row']['l_id'],
+				   'email' => $data['row']['email']
                );
 			   $this->session->set_userdata($newdata);
 			   //var_dump($info);

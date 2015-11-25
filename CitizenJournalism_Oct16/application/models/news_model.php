@@ -22,6 +22,45 @@ class news_model extends CI_Model {
 	        return $query->row_array();
    }
    
+   public function report_news($n_id)
+   { 
+			$this->db->query("update news set status=2 where n_id=".$n_id);	
+           
+            $this->load->helper('url');
+		
+		    $data = array(
+				'reason' => $this->input->post('reason'),
+				'email' => $this->input->post('email'),
+				'n_id'=> $n_id
+				
+	        );
+	        if($this->input->post('reason')!="") 
+				$this->db->insert('report', $data);
+			
+   }
+   
+   public function get_reasons($n_id)
+   { 
+			$this -> db -> select('*');
+			$this -> db -> from('report');
+			$this -> db -> where('n_id',$n_id);
+			
+			$query = $this -> db -> get();	
+			return $query->result_array();		
+	       
+   }
+   
+   public function get_reported_list()
+   { 
+			$this -> db -> select('*');
+			$this -> db -> from('news');
+			$this -> db -> where('status',2);
+			$this->db->order_by("n_id","desc");
+			$query = $this -> db -> get();	
+			return $query->result_array();		
+	       
+   }
+   
    public function get_news_by_category($slug = FALSE,$limit)
    { 	   
             $query = $this->db->query("select * from news n,category c where n.c_id=c.c_id and c.cname='".$slug."' order by n.n_id desc limit ".$limit);	
@@ -109,7 +148,7 @@ class news_model extends CI_Model {
 		
 			$this -> db -> select('*');
 			$this -> db -> from('advertise');
-			$this->db->where("status","0");
+			//$this->db->where("status","0");
 			$this->db->order_by("a_id","desc");
 			
 			$query = $this -> db -> get();	
@@ -125,8 +164,8 @@ class news_model extends CI_Model {
 			$this -> db -> from('advertise');
 			$this->db->order_by("a_id","desc");
 			$this->db->where("status","1");
-			$this->db->limit('2');
-			$query = $this -> db -> get();	
+			//$this->db->limit('3');
+			$query = $this -> db -> get();
 			return $query->result_array();	
            
 	       
@@ -139,6 +178,15 @@ class news_model extends CI_Model {
 			$this->db->query("update advertise set status=1 where a_id=".$a_id);			
    }
    
+   public function reject_ad($a_id)
+   {
+   			$this->db->query("update advertise set status=0 where a_id=".$a_id);	
+   }
+
+   public function delete_ad($a_id)
+   {
+   			$this->db->query("delete from advertise where a_id=".$a_id);	
+   }
    
     public function record_count() {
         return $this->db->count_all("news");
@@ -162,7 +210,7 @@ class news_model extends CI_Model {
    public function set_news($mid = FALSE)
    {
 		$this->load->helper('url');
-		var_dump($this->input->post('hidden'));
+		//var_dump($this->input->post('hidden'));
 		$data = array(
 				'title' => $this->input->post('title'),
 				'body' => $this->input->post('body'),
@@ -212,6 +260,7 @@ class news_model extends CI_Model {
 				
 		$data = array(
 				'fname' => $this->input->post('author')	,
+				'tempEmail' => $this->input->post('email')	,
                 'role'  => 'citizen'				
 	        );
 			
@@ -230,6 +279,16 @@ class news_model extends CI_Model {
 			$row=$query->row_array();
 			
 			return $row['aname'];
+			
+    }
+	
+	public function get_member_email($m_id)
+   {
+			
+			$query = $this->db->query("select tempEmail as email from member where m_id=".$m_id);	
+			$row=$query->row_array();
+			
+			return $row['email'];
 			
     }
 	

@@ -43,7 +43,12 @@ echo $this->session->userdata('msg');
 	</div>
 
 	<br/>
-
+            <div class="form-group">
+                 <div class="input-group">
+                     <input id="email" type="email" readonly value="<?php echo $email;?>" class="form-control " placeholder="Enter Email" name="email" ng-class="{ 'has-error' : uploadForm.email.$invalid && !uploadForm.email.$pristine }"/>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                </div>
+            </div>
 
 
 	<div class="form-group">
